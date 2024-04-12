@@ -7,8 +7,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Movie API')
-    .setDescription('A functional movie API for the MKS selection process.')
+    .setTitle('API de filmes')
+    .setDescription(
+      'Uma API de filmes funcional para o processo seletivo da MKS',
+    )
     .setVersion('1.0')
     .addTag('movies')
     .addTag('auth')

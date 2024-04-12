@@ -11,25 +11,39 @@ import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 import { LocalGuard } from './guards/local.guard';
 import { JwtGuard } from './guards/jwt.guard';
-import { AuthPayloadDto } from './auth.dto';
+import { AuthPayloadDto, TokenDto, TokenStatusDto } from './auth.dto';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   @UseGuards(LocalGuard)
+  @ApiOkResponse({
+    description: 'Usuário logado com sucesso',
+    type: TokenDto,
+  })
   async login(@Res() response: Response, @Req() request: Request) {
     return response.status(201).json(request.user);
   }
 
   @Get('status')
   @UseGuards(JwtGuard)
-  async status(@Req() req: Request) {
-    req.user;
+  @ApiOkResponse({
+    description: 'Usuário logado com sucesso',
+    type: TokenStatusDto,
+  })
+  async status(@Res() response: Response, @Req() req: Request) {
+    return response.status(201).json(req.user);
   }
 
   @Post('register')
+  @ApiOkResponse({
+    description: 'Usuário registrado com sucesso',
+    type: TokenDto,
+  })
   async register(
     @Res() response: Response,
     @Body() authPayload: AuthPayloadDto,
