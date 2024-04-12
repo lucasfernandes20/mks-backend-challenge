@@ -1,73 +1,124 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API CRUD de Filmes usando NestJS e TypeORM
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este projeto é uma API CRUD (Create, Read, Update, Delete) de filmes com autenticação JWT (JSON Web Tokens), construída utilizando NestJS, TypeORM, PostgreSQL e Docker. A API permite gerenciar uma coleção de filmes, onde os usuários autenticados podem adicionar, visualizar, atualizar e remover filmes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requisitos
 
-## Description
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em seu sistema:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Node.js (versão 12.x ou superior)
+- npm (geralmente instalado com o Node.js)
+- Docker
 
-## Installation
+## Configuração do Ambiente
 
-```bash
-$ npm install
+1. **Clonando o Repositório:**
+
+   Clone este repositório em sua máquina local:
+
+   ```bash
+   git clone https://github.com/lucasfernandes20/mks-backend-challenge.git
+   ```
+
+2. **Instalando Dependências:**
+
+   Navegue até o diretório do projeto e instale as dependências usando npm:
+
+   ```bash
+   cd nome-do-repositorio
+   npm install
+   ```
+
+3. **Configurando as Variáveis de Ambiente:**
+
+   Renomeie o arquivo `.env.example` para `.env` e ajuste as variáveis de ambiente conforme necessário, especialmente para configurações do banco de dados e segredo JWT.
+
+## Executando a Aplicação com Docker Compose
+
+Este projeto utiliza Docker Compose para facilitar a execução do NestJS junto com um banco de dados PostgreSQL. Certifique-se de que o Docker esteja em execução em sua máquina.
+
+1. **Iniciando os Contêineres:**
+
+   No diretório raiz do projeto, execute o seguinte comando para iniciar os contêineres Docker (NestJS + PostgreSQL):
+
+   ```bash
+   docker-compose up
+   ```
+
+   Este comando iniciará o servidor NestJS e o banco de dados PostgreSQL.
+
+2. **Acessando a API:**
+
+   A API estará disponível em `url em breve`. Você pode usar ferramentas como Postman ou cURL para interagir com os endpoints.
+
+## Estrutura do Projeto
+
+A estrutura do projeto segue as convenções do NestJS:
+
+```
+src/
+|-- auth/                      # Módulo de autenticação (JWT)
+|-- movies/                    # Módulo de gerenciamento de filmes
+|-- database/                  # Módulo de gerenciamento do banco de dados
+|-- main.ts                    # Ponto de entrada da aplicação
+|-- app.module.ts              # Módulo raiz da aplicação
 ```
 
-## Running the app
+- **`auth/`**: Contém os controladores, serviços, entidades e guardas relacionados à autenticação usando JWT.
+- **`movies/`**: Possui os controladores, serviços e entidades para o CRUD de filmes.
+- **`database/`**: Inclui módulo de configuração do banco de dados.
 
-```bash
-# development
-$ npm run start
+## Endpoints da API
 
-# watch mode
-$ npm run start:dev
+O projeto possui documentação com [`swagger`](https://localhost:3000/api). Na documentação será possível visualizar todos os endpoints, seus requerimentos para requisição e seus retornos.
 
-# production mode
-$ npm run start:prod
-```
+### Autenticação
 
-## Test
+- `POST /auth/register`: Registro de novo usuário.
+- `POST /auth/login`: Login de usuário (retorna token JWT).
 
-```bash
-# unit tests
-$ npm run test
+### Filmes
 
-# e2e tests
-$ npm run test:e2e
+- `GET /movies`: Retorna a lista de todos os filmes.
+- `GET /movies/:id`: Retorna detalhes de um filme específico.
+- `POST /movies`: Adiciona um novo filme.
+- `PUT /movies/:id`: Atualiza os detalhes de um filme existente.
+- `DELETE /movies/:id`: Remove um filme existente.
 
-# test coverage
-$ npm run test:cov
-```
+## Variáveis de Ambiente
 
-## Support
+Certifique-se de configurar corretamente as variáveis de ambiente no arquivo `.env`. Aqui estão algumas variáveis importantes:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_NAME`: Configurações de conexão com o banco de dados PostgreSQL.
+- `JWT_SECRET`: Segredo utilizado para assinar tokens JWT.
 
-## Stay in touch
+## Considerações
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Este projeto foi desenvolvido para o processo seletivo da empresa MKS com as tecnologias exigidas pelo processo. Ainda não sou proeficiênte em todas as tecnologias que foram utilizadas mas estou estudando e melhorando elas todos os dias. Sinta-se a vontade para me apontar uma falha e me dar feedbacks. Busco implementar um sistema de cache, no processo seletivo foi mencionado para usar o `redis` mas recentemente a empresa [`anunciou que estava deixando de oferecer seu software de banco de dados NoSQL em memória sob a licença de código aberto`](https://medium.com/@marcio.kgr/a-queda-do-redis-2c7a1e4119bb). Por conta deste imprevisto, estou buscando estudar outras soluções para o mesmo propósito.
 
-## License
+## Nível de Experiência com Tecnologias
 
-Nest is [MIT licensed](LICENSE).
+Aqui está uma breve descrição do meu nível de experiência com as tecnologias utilizadas no projeto:
+
+### Avançado
+
+- TypeScript
+- PostgreSQL
+- Nest.js
+
+### Intermediário
+
+- TypeORM
+- Docker
+- Swagger
+
+### Básico
+
+- Redis
+
+## Autor
+
+Este projeto foi desenvolvido por Lucas Fernandes.
+
+- LinkedIn: [lucasfernandesreis](https://www.linkedin.com/in/lucasfernandesreis/)
+- GitHub: [lucasfernandes20](https://github.com/lucasfernandes20)
