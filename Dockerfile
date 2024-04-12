@@ -13,8 +13,6 @@ RUN npm install
 # Copia o restante dos arquivos da aplicação para o diretório de trabalho
 COPY . .
 
-RUN npm run build
-
 # Expõe a porta em que a aplicação será executada
 EXPOSE 3000
 

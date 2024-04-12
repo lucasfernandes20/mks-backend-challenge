@@ -1,14 +1,15 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class MovieDto {
-  id?: string;
-
+export class CreateMovieDto {
   @IsString()
   @IsNotEmpty()
   title: string;
 
   @IsString()
   description: string;
+
+  @IsString()
+  director: string;
 
   @IsNumber()
   @IsNotEmpty()
@@ -21,7 +22,4 @@ export class MovieDto {
   @IsString()
   @IsNotEmpty()
   bannerUrl: string;
-
-  createdAt?: Date;
-  updatedAt?: Date;
 }
