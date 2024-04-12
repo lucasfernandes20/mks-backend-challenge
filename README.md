@@ -10,6 +10,14 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 - npm (geralmente instalado com o Node.js)
 - Docker
 
+## Deploy
+
+Feito o deploy da API no AWS EC2
+
+- [`ir para documentação de produção`](http://54.233.216.255:3000/api)
+
+Banco de dados de produção no AWS RDS (Postgres)
+
 ## Configuração do Ambiente
 
 1. **Clonando o Repositório:**
@@ -70,7 +78,7 @@ src/
 
 ## Endpoints da API
 
-O projeto possui documentação com [`swagger`](https://localhost:3000/api). Na documentação será possível visualizar todos os endpoints, seus requerimentos para requisição e seus retornos.
+O projeto possui documentação com [`swagger`](http://54.233.216.255:3000/api). Na documentação será possível visualizar todos os endpoints, seus requerimentos para requisição e seus retornos.
 
 ### Autenticação
 
