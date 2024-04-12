@@ -1,11 +1,32 @@
 version: '3'
 services:
-  postgres:
-    image: postgres
-    restart: always
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
     environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      NODE_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: movies
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:latest
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}  # Definir a senha do superusuário
+      POSTGRES_DB: ${DB_NAME}
     logging:
       options:
         max-size: "10m"
@@ -13,5 +34,8 @@ services:
     ports:
       - "5435:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
-      - ./create-db.sql:/docker-entrypoint-initdb.d/create-database.sql
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
+
+volumes:
+  pgdata:

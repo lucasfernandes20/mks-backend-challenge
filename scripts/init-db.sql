@@ -1,4 +1,4 @@
-CREATE DATABASE movies
+CREATE DATABASE IF NOT EXISTS movies
     WITH
       OWNER = postgres
       ENCODING = 'UTF8'

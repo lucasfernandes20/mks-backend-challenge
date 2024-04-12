@@ -1,6 +1,8 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateMovieDto {
+export class MovieDto {
+  id?: string;
+
   @IsString()
   @IsNotEmpty()
   title: string;
@@ -12,11 +14,14 @@ export class CreateMovieDto {
   @IsNotEmpty()
   year: number;
 
-  @IsString()
+  @IsNumber({ maxDecimalPlaces: 1 })
   @IsNotEmpty()
-  imdbRating: string;
+  imdbRating: number;
 
   @IsString()
   @IsNotEmpty()
   bannerUrl: string;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }
