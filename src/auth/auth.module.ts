@@ -5,6 +5,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { config } from 'dotenv';
 import { Auth } from './auth.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PassportModule } from '@nestjs/passport';
+import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -13,8 +16,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       secret: config().parsed.JWT_SECRET,
       signOptions: { expiresIn: '1d' },
     }),
+    PassportModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
