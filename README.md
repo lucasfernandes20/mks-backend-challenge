@@ -57,7 +57,7 @@ Este projeto utiliza Docker Compose para facilitar a execução do NestJS junto 
 
 2. **Acessando a API:**
 
-   A API estará disponível em `url em breve`. Você pode usar ferramentas como Postman ou cURL para interagir com os endpoints.
+   A API estará disponível [`aqui`](http://54.233.216.255:3000/). Você pode usar ferramentas como Postman ou cURL para interagir com os endpoints.
 
 ## Estrutura do Projeto
 
