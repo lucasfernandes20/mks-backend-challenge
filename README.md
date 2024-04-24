@@ -102,7 +102,7 @@ Certifique-se de configurar corretamente as variáveis de ambiente no arquivo `.
 
 ## Considerações
 
-Este projeto foi desenvolvido para o processo seletivo da empresa MKS com as tecnologias exigidas pelo processo. Ainda não sou proeficiênte em todas as tecnologias que foram utilizadas mas estou estudando e melhorando elas todos os dias. Sinta-se a vontade para me apontar uma falha e me dar feedbacks. Busco implementar um sistema de cache, no processo seletivo foi mencionado para usar o `redis` mas recentemente a empresa [`anunciou que estava deixando de oferecer seu software de banco de dados NoSQL em memória sob a licença de código aberto`](https://medium.com/@marcio.kgr/a-queda-do-redis-2c7a1e4119bb). Por conta deste imprevisto, estou buscando estudar outras soluções para o mesmo propósito.
+Este projeto foi desenvolvido para o processo seletivo da empresa MKS com as tecnologias exigidas pelo processo. Ainda não sou proeficiênte em todas as tecnologias que foram utilizadas mas estou estudando e melhorando elas todos os dias. Sinta-se a vontade para me apontar uma falha e me dar feedbacks. Busco implementar um banco de dados para o cache em memória, no processo seletivo foi mencionado para usar o `redis` mas recentemente a empresa [`anunciou que estava deixando de oferecer seu software de banco de dados NoSQL em memória sob a licença de código aberto`](https://medium.com/@marcio.kgr/a-queda-do-redis-2c7a1e4119bb). Por conta deste imprevisto, estou buscando estudar outras soluções para o mesmo propósito.
 
 ## Nível de Experiência com Tecnologias
 
@@ -112,11 +112,11 @@ Aqui está uma breve descrição do meu nível de experiência com as tecnologia
 
 - TypeScript
 - PostgreSQL
+- TypeORM
 - Nest.js
 
 ### Intermediário
 
-- TypeORM
 - Docker
 - Swagger
 
