@@ -15,9 +15,10 @@ import { ConfigService } from '@nestjs/config';
         autoLoadEntities: true,
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: ConfigService.get('NODE_ENV') === 'development',
-        ssl: {
-          rejectUnauthorized: false,
-        },
+        ssl:
+          ConfigService.get('NODE_ENV') === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
       }),
       inject: [ConfigService],
     }),

@@ -8,43 +8,43 @@ import {
   Put,
   Res,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Response } from 'express';
 import { CreateMovieDto, MovieDto } from 'src/movies/movie.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 @ApiTags('movies')
+@UseGuards(JwtGuard)
+@UseInterceptors(CacheInterceptor)
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
+  @CacheTTL(20 * 1_000)
   @Get()
-  @UseGuards(JwtGuard)
   @ApiOkResponse({
     description: 'Listagem de filmes',
     type: [MovieDto],
   })
-  async findAll(@Res() response: Response): Promise<Response<MovieDto[]>> {
-    return response.status(200).json(await this.moviesService.findAll());
+  async findAll(): Promise<MovieDto[]> {
+    return await this.moviesService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(JwtGuard)
   @ApiOkResponse({
     description: 'Detalhes de um filme',
     type: MovieDto,
   })
-  async findOne(
-    @Res() response: Response,
-    @Param('id') id: string,
-  ): Promise<Response<MovieDto>> {
-    return response.status(200).json(await this.moviesService.findOne(id));
+  async findOne(@Param('id') id: string): Promise<MovieDto> {
+    const movie = await this.moviesService.findOne(id);
+    return movie;
   }
 
   @Post()
-  @UseGuards(JwtGuard)
   @ApiOkResponse({
     description: 'Filme criado com sucesso',
     type: MovieDto,
@@ -62,7 +62,6 @@ export class MoviesController {
   }
 
   @Put(':id')
-  @UseGuards(JwtGuard)
   @ApiOkResponse({
     description: 'Filme atualizado com sucesso',
     type: MovieDto,
@@ -81,7 +80,6 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtGuard)
   @ApiOkResponse({
     description: 'Filme removido com sucesso',
     type: null,
