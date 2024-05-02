@@ -12,11 +12,11 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 ## Deploy
 
-Feito o deploy da API no AWS EC2
+Feito o deploy da API no AWS EC2 (Em shutdown para poupar custos desnecessários)
 
 - [`ir para documentação de produção`](http://54.233.216.255:3000/api)
 
-Banco de dados de produção no AWS RDS (Postgres)
+Banco de dados de produção no AWS RDS - Postgres (Em shutdown para poupar custos desnecessários)
 
 ## Configuração do Ambiente
 
